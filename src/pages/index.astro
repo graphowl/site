@@ -1,22 +1,39 @@
 ---
-const title = 'GraphOWL: the knowledge graph engine';
-const description = 'Model, query, reason over and validate connected knowledge. A Rust server with SPARQL, Cypher, OWL 2 RL reasoning, validation, time travel and a built-in MCP server for AI agents.';
+const title = 'GraphOWL: the semantic layer for your data and your agents';
+const description = 'Describe your business once. GraphOWL maps it to your databases, answers questions in your own concepts, explains every answer and keeps AI agents inside the rules. Rust server, SPARQL, Cypher, reasoning, validation and a built-in MCP server.';
 
 const facts = [
-  { big: 'W3C', small: 'RDF, SPARQL, SHACL, OWL 2 RL' },
-  { big: 'MCP', small: '101 tools for AI agents, built in' },
-  { big: '469', small: 'API operations, fully described' },
+  { big: 'In place', small: 'query sources without copying them' },
+  { big: 'Explained', small: 'derived facts marked, history kept' },
+  { big: 'MCP', small: '101 tools for agents, with grants' },
   { big: '1 server', small: 'written in Rust, one Postgres' },
 ];
 
 const useCases = [
-  { tag: 'Data', title: 'Data catalog', text: 'Definitions, owners and lineage queried like any other fact, not kept in a separate tool.', color: 'a' },
-  { tag: 'Models', title: 'Domain model', text: 'An ontology proposed from your database, reviewed by a person, then checked against the data.', color: 'b' },
+  { tag: 'Access', title: 'Query data where it lives', text: 'Ask a source database in place through an approved mapping, in business concepts, without bulk-copying it into a graph store.', color: 'a' },
+  { tag: 'Models', title: 'From vocabulary to executable semantics', text: 'Take terms from candidate to class, property and source mapping, with validation and a query at the end of the path.', color: 'b' },
   { tag: 'Rules', title: 'Compliance rules', text: 'Say which records break which rule, and why, with the evidence one click away.', color: 'c' },
-  { tag: 'AI', title: 'Agent context', text: 'Give an assistant reviewed, dated and traceable context instead of a pile of documents.', color: 'd' },
-  { tag: 'Federation', title: 'Answers across sources', text: 'Ask a source database in place through a reviewed mapping, without copying it first.', color: 'e' },
-  { tag: 'Search', title: 'Search and RAG', text: 'Keyword and semantic search that stays inside the part of the graph you can reach.', color: 'f' },
+  { tag: 'Agents', title: 'Guardrails for AI agents', text: 'Agents work through the model: scoped to a workspace, limited by a grant, proposing changes that a person approves.', color: 'd' },
+  { tag: 'Integration', title: 'One meaning, many systems', text: 'Reconcile inconsistent terms across databases and applications while keeping what each source means.', color: 'e' },
+  { tag: 'Catalog', title: 'Data catalog and lineage', text: 'Definitions, owners and lineage queried like any other fact, in the same graph as the domain model.', color: 'f' },
 ];
+
+const pillars = [
+  { tag: 'Access', color: 'a', title: 'Ask in business concepts', text: 'A semantic model maps Farm, MilkLot and QualityMeasurement to real tables, columns and keys. A virtual graph answers a question from the source database itself, so the data does not have to move.' },
+  { tag: 'Trust', color: 'b', title: 'Know why an answer is what it is', text: 'Every fact keeps its source and its history. Reasoning is stored apart and marked as derived, with the rule that produced it, so a conclusion can be checked or challenged.' },
+  { tag: 'Change', color: 'c', title: 'Evolve the model safely', text: 'Proposals, a review queue and decisions with reasons. Model diffs and competency questions show what a change touches before it takes effect.' },
+  { tag: 'Agents', color: 'd', title: 'Keep agents inside the rules', text: 'An MCP server with 101 tools, workspace-scoped sessions and grants. Refusals are recorded. Agents propose; people decide.' },
+];
+
+const direction = [
+  { title: 'Plan across sources', text: 'An ontology-aware planner that chooses where each part of a question runs, pushes work down to the databases, and keeps data transfer small.' },
+  { title: 'Know what a change will break', text: 'Before a class, property or mapping changes, list the queries, constraints, virtual graphs and derived facts it affects.' },
+  { title: 'Trace every answer', text: 'From the business question, through ontology terms and approved mappings, to the generated source query and the rows that support the result.' },
+  { title: 'Test the model', text: 'Business questions as executable regression tests, run on every proposed change, with a quality scorecard for each pack.' },
+  { title: 'Governed writes', text: 'Change a business fact through the model and propagate it to the right source with authorization, validation and an audit trail.' },
+  { title: 'Version the whole model', text: 'Ontology, mappings, rules and vocabulary versioned together, reviewed as semantic diffs, and reversible.' },
+];
+
 
 const features = [
   { title: 'Every fact keeps its history', text: 'Nothing is deleted, only retracted. Ask any question as it stood at an earlier moment.' },
@@ -37,24 +54,27 @@ const comparison = [
   ['Built-in MCP server for AI agents', 'yes', 'add-on', 'add-on'],
 ];
 
-const health = `curl https://demo.graphowl.app/health
-# {"status":"alive","version":"0.1.0"}`;
-const curl = `curl -X POST $URL/sparql \\
-  -H "Authorization: Bearer $TOKEN" \\
+const sparql = `SELECT ?class (COUNT(?s) AS ?n)
+WHERE { GRAPH ?g { ?s a ?class } }
+GROUP BY ?class ORDER BY DESC(?n)`;
+const curl = `export PASSCODE=OWL-XXXX-XXXX
+curl -X POST https://demo.graphowl.app/sparql \\
+  -H "Authorization: Bearer $PASSCODE" \\
   -H "Content-Type: application/json" \\
   -d '{"query": "SELECT ?class (COUNT(?s) AS ?n)
         WHERE { GRAPH ?g { ?s a ?class } }
         GROUP BY ?class ORDER BY DESC(?n)"}'`;
 const py = `from graphowl import GraphOWL
 
-owl = GraphOWL(url=URL, api_key=TOKEN)
+owl = GraphOWL(url="https://demo.graphowl.app",
+               api_key="OWL-XXXX-XXXX", workspace="dairy-coop")
 rows = owl.query.sparql("""
   SELECT ?class (COUNT(?s) AS ?n)
   WHERE { GRAPH ?g { ?s a ?class } }
   GROUP BY ?class ORDER BY DESC(?n)""")`;
-const ts = `const res = await fetch(\`\${URL}/sparql\`, {
+const ts = `const res = await fetch("https://demo.graphowl.app/sparql", {
   method: "POST",
-  headers: { Authorization: \`Bearer \${TOKEN}\`,
+  headers: { Authorization: "Bearer OWL-XXXX-XXXX",
              "Content-Type": "application/json" },
   body: JSON.stringify({ query: \`SELECT ?class (COUNT(?s) AS ?n)
     WHERE { GRAPH ?g { ?s a ?class } }
@@ -92,7 +112,7 @@ const { rows } = await res.json();`;
       <div class="wrap bar">
         <a class="brand" href="/" aria-label="GraphOWL"><img src="/assets/owl.png" alt="" width="34" height="34" /><span>Graph<b>OWL</b></span></a>
         <nav aria-label="Primary">
-          <a href="#features">Features</a>
+          <a href="#pillars">What it does</a>
           <a href="#use-cases">Use cases</a>
           <a href="#how">How it works</a>
           <a href="#cookbooks">Cookbooks</a>
@@ -110,8 +130,8 @@ const { rows } = await res.json();`;
       <div class="wrap hero-grid">
         <div>
           <p class="chips"><span>Early access</span><span>Rust</span><span>HTTP</span><span>MCP</span></p>
-          <h1>The <em>knowledge graph</em> engine.</h1>
-          <p class="lede">Model, query, reason over and validate connected knowledge from your databases, documents and systems. History, rules and validation are part of the engine, not added on top of it.</p>
+          <h1>The <em>semantic layer</em> for your data and your agents.</h1>
+          <p class="lede">Describe your business once. GraphOWL maps it to your databases, answers questions in your own concepts, explains every answer, and keeps AI agents inside the rules. History, validation and review are part of the engine, not added on top of it.</p>
           <p class="hero-cta">
             <a class="btn solid big" href="https://docs.graphowl.app/start/quickstart/">Get started</a>
             <a class="btn ghost big" href="mailto:connect@graphowl.app?subject=GraphOWL%20demo%20access">Request demo access</a>
@@ -159,12 +179,12 @@ const { rows } = await res.json();`;
     <section class="band" id="quick">
       <div class="wrap">
         <h2>Up and running in five minutes</h2>
-        <p class="sub">A live demo to try now, or a container to run yourself.</p>
+        <p class="sub">A live demo on a synthetic dairy cooperative. Book a short walkthrough, get a passcode, and ask your first question in the console or from code.</p>
         <div class="steps">
-          <div class="step"><span class="num">01</span><div><h3>Get access</h3><p>Email for a demo login, or for the early-access container.</p></div><pre><code>connect@graphowl.app</code></pre></div>
-          <div class="step"><span class="num">02</span><div><h3>Check it is up</h3><p>One call, no setup.</p></div><pre><code>{health}</code></pre></div>
+          <div class="step"><span class="num">01</span><div><h3>Get a passcode</h3><p>Book a 20-minute walkthrough. Straight after booking you are shown a passcode, valid for seven days.</p></div><div class="codes"><a class="btn solid big" href="https://demo.graphowl.app/__access">Get a passcode</a><p class="note">Or email connect@graphowl.app and we will send one.</p></div></div>
+          <div class="step"><span class="num">02</span><div><h3>Open the console</h3><p>Go to demo.graphowl.app and enter the passcode. Open <b>Query</b> in the left menu, paste a question and run it.</p></div><pre><code>{sparql}</code></pre></div>
           <div class="step"><span class="num">03</span>
-            <div><h3>Ask a question</h3><p>Count what the graph holds, by class.</p>
+            <div><h3>Or call it from code</h3><p>The passcode is also your API key: send it as a bearer token.</p>
               <div class="tabs" role="tablist" aria-label="Language">
                 <button role="tab" aria-selected="true" data-tab="curl">curl</button>
                 <button role="tab" aria-selected="false" data-tab="py">Python</button>
@@ -182,9 +202,21 @@ const { rows } = await res.json();`;
       </div>
     </section>
 
+    <section class="band" id="pillars">
+      <div class="wrap">
+        <h2>One model, four jobs</h2>
+        <p class="sub">A semantic model is only useful if it does work. GraphOWL uses the same approved model to reach data, justify answers, govern change and constrain agents.</p>
+        <div class="cards two-up">
+          {pillars.map((p) => (
+            <article class={`card c-${p.color}`}><span class="tag">{p.tag}</span><h3>{p.title}</h3><p>{p.text}</p></article>
+          ))}
+        </div>
+      </div>
+    </section>
+
     <section class="band alt" id="use-cases">
       <div class="wrap">
-        <h2>Built for real workloads</h2>
+        <h2>What people use it for</h2>
         <p class="sub">One engine, many domains. A data catalog, a compliance model or a product domain is one pack on the same engine.</p>
         <div class="cards">
           {useCases.map((u) => (
@@ -196,8 +228,8 @@ const { rows } = await res.json();`;
 
     <section class="band" id="features">
       <div class="wrap">
-        <h2>What you get</h2>
-        <p class="sub">Not a metadata catalog with a graph bolted on: the engine does the work.</p>
+        <h2>What is in the engine</h2>
+        <p class="sub">The pieces the four jobs rest on.</p>
         <div class="feat">
           {features.map((f) => <div><h3>{f.title}</h3><p>{f.text}</p></div>)}
         </div>
@@ -269,6 +301,16 @@ const { rows } = await res.json();`;
           </table>
         </div>
         <p class="note">Categories describe typical products, not every one. If a row is wrong for a tool you use, tell us. <a href="/compare/">Read the full comparison, including where the others are stronger →</a></p>
+      </div>
+    </section>
+
+    <section class="band alt" id="direction">
+      <div class="wrap">
+        <h2>Where it is going</h2>
+        <p class="sub">GraphOWL is early access. These are the capabilities we are building toward, in no particular order. They are not all in the demo today; <a href="https://docs.graphowl.app/reference/limits/">known limits</a> says what is.</p>
+        <div class="feat three">
+          {direction.map((d) => <div><h3>{d.title}</h3><p>{d.text}</p></div>)}
+        </div>
       </div>
     </section>
 
@@ -423,6 +465,8 @@ const { rows } = await res.json();`;
   .tabs button[aria-selected='true'] { background:var(--navy); color:#fff; }
 
   .cards { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
+  .cards.two-up { grid-template-columns:repeat(2,1fr); }
+  .note { margin:10px 0 0; }
   .card { border-radius:18px; padding:24px; color:#fff; box-shadow:0 12px 30px rgba(11,31,63,.14); min-height:190px; }
   .card h3 { color:#fff; font-size:22px; }
   .card p { margin:0; opacity:.93; }
@@ -479,7 +523,7 @@ const { rows } = await res.json();`;
     .hero-grid, .two { grid-template-columns:1fr; }
     .graphic { max-width:460px; margin:0 auto; }
     .strip-grid { grid-template-columns:repeat(2,1fr); }
-    .cards, .feat, .feat.three { grid-template-columns:1fr; }
+    .cards, .cards.two-up, .feat, .feat.three { grid-template-columns:1fr; }
     .step { grid-template-columns:1fr; }
     .foot { grid-template-columns:1fr 1fr; }
   }
