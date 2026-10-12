@@ -1,0 +1,64 @@
+---
+const title = 'GraphOWL compared: what is different, and where others are stronger';
+const description = 'A category-level comparison of GraphOWL with relational databases, property-graph servers and RDF triple stores, including where each is the better choice.';
+const rows = [
+  ['Meaning (ontology, axioms) stored with the data', 'Yes: classes, relations and OWL 2 RL axioms are part of the graph', 'Not natively; meaning lives in documentation and code', 'Labels and types; no built-in axioms', 'Usually yes; depth varies by product'],
+  ['Every fact keeps its history; query as of a moment', 'Yes: facts are retracted, never deleted; `asOf` on queries', 'Only with temporal tables or audit logs you build', 'Usually not; some offer extensions', 'Varies; often not by default'],
+  ['Inferred facts marked as inferred', 'Yes: stored in their own graph with the rule that produced them', 'Not applicable', 'Not applicable', 'Varies'],
+  ['Software proposes, a person approves', 'Built in: proposals, a review queue, decisions with reasons', 'Application layer', 'Application layer', 'Application layer'],
+  ['Constraint validation', 'SHACL-style constraints and quality expectations, with stated gaps', 'Native constraints, mature and fast', 'Property constraints, limited', 'SHACL in many products'],
+  ['Query languages', 'SPARQL 1.1 and a documented Cypher subset', 'SQL', 'Cypher or GQL', 'SPARQL'],
+  ['AI-agent access', 'MCP server built in, with grants and recorded refusals', 'Add a connector', 'Add a connector', 'Add a connector'],
+];
+const stronger = [
+  ['Relational databases', 'Transactions, throughput, tooling, and decades of operational knowledge. GraphOWL is not a system of record for transactions; it reads your databases.'],
+  ['Property-graph servers', 'Deep graph analytics, mature ecosystems, and full dialect coverage. GraphOWL traverses with bounds and supports a subset of Cypher.'],
+  ['RDF triple stores', 'Standards conformance and scale in the products built for it. GraphOWL states what it implements, dated, and publishes no benchmarks yet.'],
+  ['All of them', 'Maturity. GraphOWL is early access: the API may change before 1.0.'],
+];
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title><meta name="description" content={description} />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png" />
+    <link rel="canonical" href="https://graphowl.app/compare/" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+    <style is:global>
+      :root { --navy:#0b1f3f; --teal:#0498ab; --light:#5cc7d8; --mist:#f2fafc; --ink:#13263a; --muted:#4a5b64; --line:#d6e6ea; }
+      * { box-sizing:border-box; } body { margin:0; font-family:'Outfit',system-ui,sans-serif; color:var(--ink); line-height:1.55; }
+      a { color:var(--teal); } .wrap { max-width:1140px; margin:0 auto; padding:0 24px; }
+      header { background:#0b1f3f; } .bar { display:flex; align-items:center; gap:24px; height:64px; }
+      .brand { display:flex; align-items:center; gap:10px; color:#fff; text-decoration:none; font-weight:700; font-size:22px; } .brand b { color:var(--light); } .brand img { border-radius:8px; background:#fff; }
+      .bar nav { margin-left:auto; display:flex; gap:22px; } .bar nav a { color:#cfe6ec; text-decoration:none; font-size:15px; font-weight:500; }
+      h1 { font-size:clamp(34px,5vw,52px); letter-spacing:-.02em; line-height:1.08; margin:56px 0 12px; color:var(--navy); }
+      h2 { font-size:30px; letter-spacing:-.015em; color:var(--navy); margin:48px 0 12px; } .lede { font-size:19px; color:var(--muted); max-width:780px; }
+      .tablewrap { overflow-x:auto; background:#fff; border:1px solid var(--line); border-radius:16px; margin-top:24px; }
+      table { width:100%; border-collapse:collapse; min-width:900px; font-size:15px; } th, td { padding:14px 16px; text-align:left; vertical-align:top; border-bottom:1px solid var(--line); }
+      thead th { font-size:13px; text-transform:uppercase; letter-spacing:.06em; color:var(--muted); } tbody th { font-weight:600; width:20%; }
+      .us { background:#e7f6f9; } tbody tr:last-child th, tbody tr:last-child td { border-bottom:0; }
+      .grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-top:20px; } .box { border:1px solid var(--line); border-radius:16px; padding:22px; background:#fff; } .box h3 { margin:0 0 6px; color:var(--navy); } .box p { margin:0; color:var(--muted); }
+      .note { color:var(--muted); font-size:14px; margin:24px 0 64px; } footer { background:#08162d; color:#a9bfca; padding:28px 0; font-size:14px; } footer a { color:#a9bfca; }
+      @media (max-width:800px) { .grid { grid-template-columns:1fr; } .bar nav { display:none; } }
+    </style>
+  </head>
+  <body>
+    <header><div class="wrap bar"><a class="brand" href="/"><img src="/assets/owl.png" alt="" width="34" height="34" /><span>Graph<b>OWL</b></span></a><nav><a href="/">Home</a><a href="https://docs.graphowl.app/">Docs</a><a href="https://github.com/graphowl/graphowl">GitHub</a></nav></div></header>
+    <main class="wrap">
+      <h1>How GraphOWL differs, and where it does not</h1>
+      <p class="lede">A comparison by category, written by GraphOWL's authors. It describes typical products, not every one, and the other columns are our reading of common behaviour, not a test of any named product. If a cell is wrong for a tool you use, <a href="mailto:connect@graphowl.app?subject=Comparison%20correction">tell us</a> and we will fix it.</p>
+      <div class="tablewrap"><table>
+        <thead><tr><th></th><th class="us">GraphOWL</th><th>Relational database</th><th>Property-graph server</th><th>RDF triple store</th></tr></thead>
+        <tbody>{rows.map((r) => <tr><th scope="row">{r[0]}</th><td class="us">{r[1]}</td><td>{r[2]}</td><td>{r[3]}</td><td>{r[4]}</td></tr>)}</tbody>
+      </table></div>
+      <h2>Where the others are stronger</h2>
+      <div class="grid">{stronger.map((s) => <div class="box"><h3>{s[0]}</h3><p>{s[1]}</p></div>)}</div>
+      <h2>How we keep this honest</h2>
+      <p class="lede">Every GraphOWL cell can be checked against the <a href="https://docs.graphowl.app/">documentation</a>, the <a href="https://github.com/graphowl/graphowl/blob/main/docs/standards.md">dated standards page</a> and the <a href="https://docs.graphowl.app/reference/limits/">known limits</a>. We publish no benchmark figures until we can publish the method that produced them. Last reviewed 13 October 2026.</p>
+      <p class="note">GraphOWL is in early access: the API may change before 1.0.</p>
+    </main>
+    <footer><div class="wrap">GraphOWL · <a href="mailto:connect@graphowl.app">connect@graphowl.app</a></div></footer>
+  </body>
+</html>

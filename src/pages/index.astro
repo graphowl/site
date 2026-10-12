@@ -95,6 +95,7 @@ const { rows } = await res.json();`;
           <a href="#features">Features</a>
           <a href="#use-cases">Use cases</a>
           <a href="#how">How it works</a>
+          <a href="#cookbooks">Cookbooks</a>
           <a href="#run">Run it</a>
           <a href="https://docs.graphowl.app/">Docs</a>
         </nav>
@@ -203,6 +204,25 @@ const { rows } = await res.json();`;
       </div>
     </section>
 
+    <section class="band alt" id="behaves">
+      <div class="wrap">
+        <h2>How it behaves</h2>
+        <p class="sub">Three properties that follow from how the engine is built, and that you can check.</p>
+        <img class="diagram" src="/assets/time-travel.svg" alt="Every fact keeps its history; an asOf cursor sits between two transactions" loading="lazy" />
+        <img class="diagram" src="/assets/review-flow.svg" alt="Proposals flow from software and agents to a review queue, then the approved model, then the graph" loading="lazy" />
+        <img class="diagram" src="/assets/reasoning.svg" alt="Stated facts, and a derived conclusion marked as derived" loading="lazy" />
+      </div>
+    </section>
+
+    <section class="band" id="agents">
+      <div class="wrap">
+        <h2>Context an AI assistant can trust</h2>
+        <p class="sub">GraphOWL includes an MCP server with 101 tools. An assistant can look things up, follow relationships, run queries, propose changes and record what it learned. Every answer traces to facts and rules; agents propose and people decide.</p>
+        <img class="diagram" src="/assets/mcp-flow.svg" alt="An AI assistant calls the MCP server, which offers five families of tools over the graph" loading="lazy" />
+        <p class="more"><a href="https://docs.graphowl.app/ai/mcp-overview/">Read the MCP guide →</a> &nbsp; <a href="https://docs.graphowl.app/cookbooks/agent-memory/">Agent memory cookbook →</a></p>
+      </div>
+    </section>
+
     <section class="band alt" id="see">
       <div class="wrap">
         <h2>See it</h2>
@@ -217,6 +237,20 @@ const { rows } = await res.json();`;
         <p class="sub">From scattered data to answers you can trust, in five steps. Every step is reviewed, dated and traceable.</p>
         <img class="diagram" src="/assets/pipeline.svg" alt="Connect, model, review, ask and check, serve" loading="lazy" />
         <img class="diagram" src="/assets/architecture.svg" alt="One engine, three layers: people and agents, domain models, the engine" loading="lazy" />
+        <img class="diagram" src="/assets/api-surface.svg" alt="The console, HTTP API, MCP server and operations routes around the engine" loading="lazy" />
+      </div>
+    </section>
+
+    <section class="band" id="cookbooks">
+      <div class="wrap">
+        <h2>Worked scenarios</h2>
+        <p class="sub">Each cookbook starts from a question someone actually asks, and every query in it was run against the live demo.</p>
+        <div class="cards">
+          <a class="card c-a" href="https://docs.graphowl.app/cookbooks/dairy-traceability/"><span class="tag">Trace</span><h3>Dairy traceability</h3><p>A quality test failed: which lot, which batches, which retailers to call?</p></a>
+          <a class="card c-b" href="https://docs.graphowl.app/cookbooks/data-catalog/"><span class="tag">Catalog</span><h3>A data catalog</h3><p>What do we have, who owns it, what depends on it?</p></a>
+          <a class="card c-c" href="https://docs.graphowl.app/cookbooks/compliance-rules/"><span class="tag">Rules</span><h3>Rules and compliance</h3><p>Which records break which rule, and has anyone accepted the exception?</p></a>
+          <a class="card c-d" href="https://docs.graphowl.app/cookbooks/agent-memory/"><span class="tag">Agents</span><h3>Agent memory</h3><p>How does an assistant remember what it learned, on the record?</p></a>
+        </div>
       </div>
     </section>
 
@@ -234,7 +268,7 @@ const { rows } = await res.json();`;
             </tbody>
           </table>
         </div>
-        <p class="note">Categories describe typical products, not every one. If a row is wrong for a tool you use, tell us.</p>
+        <p class="note">Categories describe typical products, not every one. If a row is wrong for a tool you use, tell us. <a href="/compare/">Read the full comparison, including where the others are stronger →</a></p>
       </div>
     </section>
 
@@ -254,6 +288,7 @@ const { rows } = await res.json();`;
     <section class="band alt" id="run">
       <div class="wrap">
         <h2>Two ways to run it</h2>
+        <img class="diagram" src="/assets/run-options.svg" alt="The hosted demo and the early-access container" loading="lazy" />
         <div class="two">
           <article class="run a">
             <h3>Try the hosted demo</h3>
@@ -307,8 +342,8 @@ const { rows } = await res.json();`;
     <footer>
       <div class="wrap foot">
         <div><a class="brand" href="/"><img src="/assets/owl.png" alt="" width="28" height="28" /><span>Graph<b>OWL</b></span></a><p>The knowledge graph engine.</p></div>
-        <div><h4>Product</h4><a href="#features">Features</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a></div>
-        <div><h4>Resources</h4><a href="https://docs.graphowl.app/">Documentation</a><a href="https://docs.graphowl.app/api/reference/">API reference</a><a href="https://docs.graphowl.app/ai/mcp-overview/">MCP and agents</a><a href="https://github.com/graphowl/examples">Examples</a></div>
+        <div><h4>Product</h4><a href="#features">Features</a><a href="#use-cases">Use cases</a><a href="#run">Run it</a><a href="/compare/">Compare</a></div>
+        <div><h4>Resources</h4><a href="https://docs.graphowl.app/">Documentation</a><a href="https://docs.graphowl.app/api/reference/">API reference</a><a href="https://docs.graphowl.app/ai/mcp-overview/">MCP and agents</a><a href="https://docs.graphowl.app/cookbooks/">Cookbooks</a><a href="https://github.com/graphowl/examples">Examples</a></div>
         <div><h4>Project</h4><a href="https://github.com/graphowl/graphowl">GitHub</a><a href="https://github.com/graphowl/graphowl/blob/main/CHANGELOG.md">Changelog</a><a href="https://github.com/graphowl/graphowl/blob/main/SECURITY.md">Security</a><a href="https://docs.graphowl.app/project/licences/">Licences</a><a href="mailto:connect@graphowl.app">connect@graphowl.app</a></div>
       </div>
       <div class="wrap legal">The demo contains synthetic data only. The GraphOWL name and logos are not licensed for reuse; see the brand terms.</div>
@@ -402,6 +437,9 @@ const { rows } = await res.json();`;
   .feat p { margin:0; color:var(--muted); font-size:15px; }
 
   .shot { border-radius:16px; border:1px solid var(--line); box-shadow:0 24px 60px rgba(11,31,63,.2); width:100%; }
+  a.card { text-decoration:none; display:block; }
+  a.card:hover { transform:translateY(-3px); }
+  .card { transition:transform .15s; }
   .diagram { width:100%; display:block; margin:0 0 22px; border-radius:20px; box-shadow:0 12px 34px rgba(11,31,63,.1); }
 
   .tablewrap { overflow-x:auto; background:#fff; border:1px solid var(--line); border-radius:16px; }
