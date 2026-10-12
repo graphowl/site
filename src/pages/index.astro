@@ -2,7 +2,7 @@
 const title = 'GraphOWL: the semantic layer for your data and your agents';
 const description = 'Describe your business once. GraphOWL maps it to your databases, answers questions in your own concepts, explains every answer and keeps AI agents inside the rules. Rust server, SPARQL, openCypher, reasoning, validation and a built-in MCP server.';
 
-const walkthroughVideo = ''; // set to an embeddable video URL (for example a YouTube /embed/ link) to show the recorded walkthrough
+const walkthroughVideo = ''; // an embeddable URL (for example a YouTube /embed/ link) overrides the bundled tour below
 
 const facts = [
   { big: 'In place', small: 'query sources without copying them' },
@@ -265,7 +265,7 @@ const { rows } = await res.json();`;
         {walkthroughVideo ? (
           <div class="video"><iframe src={walkthroughVideo} title="GraphOWL walkthrough" loading="lazy" allowfullscreen></iframe></div>
         ) : (
-          <div class="video soon"><p>The recorded walkthrough is being prepared. In the meantime you can book the live one.</p><a class="btn solid" href="https://demo.graphowl.app/__access/book">Book a walkthrough call</a></div>
+          <div class="video"><video controls preload="metadata" poster="/graphowl-demo-tour.jpg" style="width:100%;height:100%;border-radius:12px;background:#0b1f3f"><source src="/graphowl-demo-tour.mp4" type="video/mp4" />Your browser cannot play this video.</video></div>
         )}
       </div>
     </section>
