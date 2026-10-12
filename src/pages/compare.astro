@@ -7,12 +7,12 @@ const rows = [
   ['Inferred facts marked as inferred', 'Yes: stored in their own graph with the rule that produced them', 'Not applicable', 'Not applicable', 'Varies'],
   ['Software proposes, a person approves', 'Built in: proposals, a review queue, decisions with reasons', 'Application layer', 'Application layer', 'Application layer'],
   ['Constraint validation', 'SHACL-style constraints and quality expectations, with stated gaps', 'Native constraints, mature and fast', 'Property constraints, limited', 'SHACL in many products'],
-  ['Query languages', 'SPARQL 1.1 and a documented Cypher subset', 'SQL', 'Cypher or GQL', 'SPARQL'],
+  ['Query languages', 'SPARQL 1.1 and a documented openCypher subset', 'SQL', 'openCypher or GQL', 'SPARQL'],
   ['AI-agent access', 'MCP server built in, with grants and recorded refusals', 'Add a connector', 'Add a connector', 'Add a connector'],
 ];
 const stronger = [
   ['Relational databases', 'Transactions, throughput, tooling, and decades of operational knowledge. GraphOWL is not a system of record for transactions; it reads your databases.'],
-  ['Property-graph servers', 'Deep graph analytics, mature ecosystems, and full dialect coverage. GraphOWL traverses with bounds and supports a subset of Cypher.'],
+  ['Property-graph servers', 'Deep graph analytics, mature ecosystems, and full dialect coverage. GraphOWL traverses with bounds and supports a subset of openCypher.'],
   ['RDF triple stores', 'Standards conformance and scale in the products built for it. GraphOWL states what it implements, dated, and publishes no benchmarks yet.'],
   ['All of them', 'Maturity. GraphOWL is early access: the API may change before 1.0.'],
 ];

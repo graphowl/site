@@ -1,6 +1,8 @@
 ---
 const title = 'GraphOWL: the semantic layer for your data and your agents';
-const description = 'Describe your business once. GraphOWL maps it to your databases, answers questions in your own concepts, explains every answer and keeps AI agents inside the rules. Rust server, SPARQL, Cypher, reasoning, validation and a built-in MCP server.';
+const description = 'Describe your business once. GraphOWL maps it to your databases, answers questions in your own concepts, explains every answer and keeps AI agents inside the rules. Rust server, SPARQL, openCypher, reasoning, validation and a built-in MCP server.';
+
+const walkthroughVideo = ''; // set to an embeddable video URL (for example a YouTube /embed/ link) to show the recorded walkthrough
 
 const facts = [
   { big: 'In place', small: 'query sources without copying them' },
@@ -39,7 +41,7 @@ const features = [
   { title: 'Every fact keeps its history', text: 'Nothing is deleted, only retracted. Ask any question as it stood at an earlier moment.' },
   { title: 'Reasoning you can tell apart', text: 'OWL 2 RL derives what follows from the model, and marks it as derived so it is never mistaken for stated.' },
   { title: 'Review before effect', text: 'Models proposed by software are proposals until a person approves them. Nothing changes the graph unreviewed.' },
-  { title: 'SPARQL and Cypher', text: 'Two ways to ask the same graph. SPARQL 1.1 and a documented Cypher subset, with honest errors.' },
+  { title: 'SPARQL and openCypher', text: 'Two ways to ask the same graph. SPARQL 1.1 and a documented openCypher subset, with honest errors.' },
   { title: 'Validation built in', text: 'SHACL-style constraints and quality expectations report what does not fit, without changing it.' },
   { title: 'Packs for any domain', text: 'Ontology, glossary, rules and expectations bundled per domain, so one engine serves many.' },
   { title: 'Virtual graphs', text: 'Query a source database in place, through a mapping a reviewer approved.' },
@@ -134,7 +136,7 @@ const { rows } = await res.json();`;
           <p class="lede">Describe your business once. GraphOWL maps it to your databases, answers questions in your own concepts, explains every answer, and keeps AI agents inside the rules. History, validation and review are part of the engine, not added on top of it.</p>
           <p class="hero-cta">
             <a class="btn solid big" href="https://docs.graphowl.app/start/quickstart/">Get started</a>
-            <a class="btn ghost big" href="mailto:connect@graphowl.app?subject=GraphOWL%20demo%20access">Request demo access</a>
+            <a class="btn ghost big" href="https://demo.graphowl.app/__access/book">Try the demo: 20 minutes</a>
           </p>
         </div>
         <svg class="graphic" viewBox="0 0 520 420" role="img" aria-label="A small graph: farms supply milk lots, which are tested and made into batches that go to retailers">
@@ -179,12 +181,12 @@ const { rows } = await res.json();`;
     <section class="band" id="quick">
       <div class="wrap">
         <h2>Up and running in five minutes</h2>
-        <p class="sub">A live demo on a synthetic dairy cooperative. Book a short walkthrough, get a passcode, and ask your first question in the console or from code.</p>
+        <p class="sub">Two ways in: a call where the author walks you through it, or 20 minutes of your own hands-on access to a live demo on a synthetic dairy cooperative.</p>
         <div class="steps">
-          <div class="step"><span class="num">01</span><div><h3>Get a passcode</h3><p>Book a 20-minute walkthrough. Straight after booking you are shown a passcode, valid for seven days.</p></div><div class="codes"><a class="btn solid big" href="https://demo.graphowl.app/__access">Get a passcode</a><p class="note">Or email connect@graphowl.app and we will send one.</p></div></div>
-          <div class="step"><span class="num">02</span><div><h3>Open the console</h3><p>Go to demo.graphowl.app and enter the passcode. Open <b>Query</b> in the left menu, paste a question and run it.</p></div><pre><code>{sparql}</code></pre></div>
+          <div class="step"><span class="num">01</span><div><h3>Pick a time</h3><p>Choose <b>20 minutes of hands-on access</b> to the demo, or a <b>30-minute walkthrough call</b> with the author. You pick the time from a list; the demo slot is yours alone.</p></div><div class="codes"><a class="btn solid big" href="https://demo.graphowl.app/__access/book">Book a time</a><p class="note">Prefer to watch first? <a href="#walkthrough">See the recorded walkthrough</a>.</p></div></div>
+          <div class="step"><span class="num">02</span><div><h3>Open the console</h3><p>When your time starts, go to demo.graphowl.app and enter your passcode. Open <b>Query</b> in the left menu, paste a question and run it. When your 20 minutes end you are signed out and anything you did is erased.</p></div><pre><code>{sparql}</code></pre></div>
           <div class="step"><span class="num">03</span>
-            <div><h3>Or call it from code</h3><p>The passcode is also your API key: send it as a bearer token.</p>
+            <div><h3>Or call it from code</h3><p>Your passcode is also an API key during your slot: send it as a bearer token.</p>
               <div class="tabs" role="tablist" aria-label="Language">
                 <button role="tab" aria-selected="true" data-tab="curl">curl</button>
                 <button role="tab" aria-selected="false" data-tab="py">Python</button>
@@ -252,6 +254,18 @@ const { rows } = await res.json();`;
         <p class="sub">GraphOWL includes an MCP server with 101 tools. An assistant can look things up, follow relationships, run queries, propose changes and record what it learned. Every answer traces to facts and rules; agents propose and people decide.</p>
         <img class="diagram" src="/assets/mcp-flow.svg" alt="An AI assistant calls the MCP server, which offers five families of tools over the graph" loading="lazy" />
         <p class="more"><a href="https://docs.graphowl.app/ai/mcp-overview/">Read the MCP guide →</a> &nbsp; <a href="https://docs.graphowl.app/cookbooks/agent-memory/">Agent memory cookbook →</a></p>
+      </div>
+    </section>
+
+    <section class="band" id="walkthrough">
+      <div class="wrap">
+        <h2>Watch a walkthrough</h2>
+        <p class="sub">A guided tour of GraphOWL on the dairy demo: from a database to a reviewed model, then questions, reasoning, history and agents.</p>
+        {walkthroughVideo ? (
+          <div class="video"><iframe src={walkthroughVideo} title="GraphOWL walkthrough" loading="lazy" allowfullscreen></iframe></div>
+        ) : (
+          <div class="video soon"><p>The recorded walkthrough is being prepared. In the meantime you can book the live one.</p><a class="btn solid" href="https://demo.graphowl.app/__access/book">Book a walkthrough call</a></div>
+        )}
       </div>
     </section>
 
@@ -334,8 +348,8 @@ const { rows } = await res.json();`;
         <div class="two">
           <article class="run a">
             <h3>Try the hosted demo</h3>
-            <p>A live server loaded with a synthetic dairy cooperative. Password-protected while GraphOWL is in early access: email for a login.</p>
-            <a class="btn solid" href="mailto:connect@graphowl.app?subject=GraphOWL%20demo%20access">Request demo access</a>
+            <p>A live server loaded with a synthetic dairy cooperative. Book 20 minutes of exclusive hands-on access, or a walkthrough call with the author.</p>
+            <a class="btn solid" href="https://demo.graphowl.app/__access/book">Book a time</a>
           </article>
           <article class="run b">
             <h3>Run it yourself</h3>
@@ -388,7 +402,7 @@ const { rows } = await res.json();`;
         <div><h4>Resources</h4><a href="https://docs.graphowl.app/">Documentation</a><a href="https://docs.graphowl.app/api/reference/">API reference</a><a href="https://docs.graphowl.app/ai/mcp-overview/">MCP and agents</a><a href="https://docs.graphowl.app/cookbooks/">Cookbooks</a><a href="https://github.com/graphowl/examples">Examples</a></div>
         <div><h4>Project</h4><a href="https://github.com/graphowl/graphowl">GitHub</a><a href="https://github.com/graphowl/graphowl/blob/main/CHANGELOG.md">Changelog</a><a href="https://github.com/graphowl/graphowl/blob/main/SECURITY.md">Security</a><a href="https://docs.graphowl.app/project/licences/">Licences</a><a href="mailto:connect@graphowl.app">connect@graphowl.app</a></div>
       </div>
-      <div class="wrap legal">The demo contains synthetic data only. The GraphOWL name and logos are not licensed for reuse; see the brand terms.</div>
+      <div class="wrap legal">The demo contains synthetic data only. The GraphOWL name and logos are not licensed for reuse; see the brand terms. Cypher is a registered trademark of Neo4j, Inc.; GraphOWL is not affiliated with Neo4j, Inc. and accepts a subset of the open openCypher specification.</div>
     </footer>
 
     <script is:inline>
@@ -484,6 +498,10 @@ const { rows } = await res.json();`;
   a.card { text-decoration:none; display:block; }
   a.card:hover { transform:translateY(-3px); }
   .card { transition:transform .15s; }
+  .video { position:relative; aspect-ratio:16/9; border-radius:18px; overflow:hidden; background:#0b1f3f; }
+  .video iframe { position:absolute; inset:0; width:100%; height:100%; border:0; }
+  .video.soon { display:grid; place-content:center; text-align:center; padding:24px; aspect-ratio:auto; min-height:220px; }
+  .video.soon p { color:#cfe6ec; margin:0 0 16px; }
   .diagram { width:100%; display:block; margin:0 0 22px; border-radius:20px; box-shadow:0 12px 34px rgba(11,31,63,.1); }
 
   .tablewrap { overflow-x:auto; background:#fff; border:1px solid var(--line); border-radius:16px; }
