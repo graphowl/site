@@ -113,7 +113,7 @@ const { rows } = await res.json();`;
     <header class="top">
       <div class="wrap bar">
         <a class="brand" href="/" aria-label="GraphOWL"><img src="/assets/owl.png" alt="" width="34" height="34" /><span>Graph<b>OWL</b></span></a>
-        <nav aria-label="Primary">
+        <nav aria-label="Primary" id="primary-nav">
           <a href="#pillars">What it does</a>
           <a href="#use-cases">Use cases</a>
           <a href="#how">How it works</a>
@@ -125,6 +125,7 @@ const { rows } = await res.json();`;
           <a class="btn ghost" href="https://github.com/graphowl/graphowl">GitHub</a>
           <a class="btn solid" href="https://docs.graphowl.app/start/quickstart/">Get started</a>
         </div>
+        <button class="burger" id="burger" aria-label="Menu" aria-expanded="false" aria-controls="primary-nav"><span></span><span></span><span></span></button>
       </div>
     </header>
 
@@ -406,6 +407,12 @@ const { rows } = await res.json();`;
     </footer>
 
     <script is:inline>
+      (function () {
+        var burger = document.getElementById('burger'), nav = document.getElementById('primary-nav');
+        if (!burger || !nav) return;
+        burger.addEventListener('click', function () { var open = nav.classList.toggle('open'); burger.setAttribute('aria-expanded', String(open)); });
+        nav.addEventListener('click', function (e) { if (e.target.tagName === 'A') { nav.classList.remove('open'); burger.setAttribute('aria-expanded', 'false'); } });
+      })();
       document.querySelectorAll('.tabs').forEach(function (tabs) {
         var scope = tabs.closest('.step');
         tabs.addEventListener('click', function (e) {
@@ -426,7 +433,7 @@ const { rows } = await res.json();`;
   body { margin:0; font-family:'Outfit',system-ui,-apple-system,'Segoe UI',sans-serif; color:var(--ink); background:#fff; line-height:1.55; -webkit-font-smoothing:antialiased; }
   a { color: var(--teal); }
   img { max-width:100%; height:auto; }
-  .wrap { max-width:1140px; margin:0 auto; padding:0 24px; }
+  .wrap { max-width:1280px; margin:0 auto; padding:0 24px; }
   code, pre { font-family:'JetBrains Mono',ui-monospace,Menlo,monospace; }
 
   .top { position:sticky; top:0; z-index:20; background:rgba(11,31,63,.92); backdrop-filter:blur(10px); border-bottom:1px solid rgba(92,199,216,.18); }
@@ -438,7 +445,7 @@ const { rows } = await res.json();`;
   nav a { color:#cfe6ec; text-decoration:none; font-weight:500; font-size:15px; }
   nav a:hover { color:#fff; }
   .cta { display:flex; gap:10px; }
-  .btn { display:inline-block; padding:9px 18px; border-radius:10px; font-weight:600; font-size:15px; text-decoration:none; border:1.5px solid transparent; transition:transform .15s, box-shadow .15s; }
+  .btn { white-space:nowrap; display:inline-block; padding:9px 18px; border-radius:10px; font-weight:600; font-size:15px; text-decoration:none; border:1.5px solid transparent; transition:transform .15s, box-shadow .15s; }
   .btn:hover { transform:translateY(-1px); }
   .btn.solid { background:linear-gradient(135deg,#5cc7d8,#0498ab); color:#04222a; box-shadow:0 6px 18px rgba(4,152,171,.35); }
   .btn.ghost { border-color:rgba(92,199,216,.55); color:#dff4f8; }
@@ -535,14 +542,40 @@ const { rows } = await res.json();`;
   .foot p { margin:4px 0 0; }
   .legal { margin-top:30px; font-size:13px; border-top:1px solid rgba(255,255,255,.1); padding-top:18px; }
 
+  .burger { display:none; }
   @media (max-width: 900px) {
-    nav { display:none; }
-    .cta { margin-left:auto; }
+    .bar { gap:12px; }
+    .burger { display:inline-flex; flex-direction:column; justify-content:center; gap:5px; width:42px; height:42px; padding:0 11px; border:1.5px solid rgba(92,199,216,.55); border-radius:10px; background:transparent; cursor:pointer; }
+    .burger span { display:block; height:2px; background:#dff4f8; border-radius:2px; }
+    nav { display:none; position:absolute; top:64px; left:0; right:0; flex-direction:column; gap:0; margin:0; padding:8px 24px 18px; background:#0b1f3f; border-bottom:1px solid rgba(92,199,216,.25); }
+    nav.open { display:flex; }
+    nav a { padding:14px 0; font-size:17px; border-bottom:1px solid rgba(92,199,216,.12); }
+    .cta { margin-left:auto; } .cta .ghost { display:none; }
+    .band { padding:56px 0; } .hero { padding:44px 0 52px; } .final { padding:52px 0; }
+    .sub { font-size:16px; margin-bottom:24px; } .lede { font-size:17px; }
+    .step { padding:18px; } .num { width:40px; height:40px; font-size:18px; }
+    .hero-cta .btn.big { width:100%; text-align:center; }
+    .btn.big { padding:13px 20px; }
+    .strip-grid b { font-size:22px; }
     .hero-grid, .two { grid-template-columns:1fr; }
     .graphic { max-width:460px; margin:0 auto; }
     .strip-grid { grid-template-columns:repeat(2,1fr); }
     .cards, .cards.two-up, .feat, .feat.three { grid-template-columns:1fr; }
-    .step { grid-template-columns:1fr; }
+    .step { grid-template-columns:minmax(0,1fr); } .step > *, .codes { min-width:0; } pre { max-width:100%; }
     .foot { grid-template-columns:1fr 1fr; }
   }
+  @media (max-width: 480px) {
+    .wrap { padding:0 18px; }
+    .brand { font-size:19px; } .brand img { width:30px; height:30px; }
+    .cta .btn { padding:8px 14px; font-size:14px; }
+    .chips span { font-size:11px; }
+    .foot { grid-template-columns:1fr; }
+    .tablewrap { margin:0 -18px; border-radius:0; }
+  }
+
+  /* Wide screens: the page grows with the window instead of sitting in a narrow column. */
+  @media (min-width: 1600px) { html { zoom: 1.15; } }
+  @media (min-width: 1920px) { html { zoom: 1.35; } }
+  @media (min-width: 2400px) { html { zoom: 1.7; } }
+  @media (min-width: 3000px) { html { zoom: 2.1; } }
 </style>
