@@ -7,7 +7,7 @@ const walkthroughVideo = ''; // an embeddable URL (for example a YouTube /embed/
 const facts = [
   { big: 'In place', small: 'query sources without copying them' },
   { big: 'Explained', small: 'derived facts marked, history kept' },
-  { big: 'MCP', small: '101 tools for agents, with grants' },
+  { big: 'MCP', small: '102 tools for agents, with grants' },
   { big: '1 server', small: 'written in Rust, one Postgres' },
 ];
 
@@ -24,7 +24,7 @@ const pillars = [
   { tag: 'Access', color: 'a', title: 'Ask in business concepts', text: 'A semantic model maps Farm, MilkLot and QualityMeasurement to real tables, columns and keys. A virtual graph answers a question from the source database itself, so the data does not have to move.' },
   { tag: 'Trust', color: 'b', title: 'Know why an answer is what it is', text: 'Every fact keeps its source and its history. Reasoning is stored apart and marked as derived, with the rule that produced it, so a conclusion can be checked or challenged.' },
   { tag: 'Change', color: 'c', title: 'Evolve the model safely', text: 'Proposals, a review queue and decisions with reasons. Model diffs and competency questions show what a change touches before it takes effect.' },
-  { tag: 'Agents', color: 'd', title: 'Keep agents inside the rules', text: 'An MCP server with 101 tools, workspace-scoped sessions and grants. Refusals are recorded. Agents propose; people decide.' },
+  { tag: 'Agents', color: 'd', title: 'Keep agents inside the rules', text: 'An MCP server with 102 tools, workspace-scoped sessions and grants. Refusals are recorded. Agents propose; people decide.' },
 ];
 
 const direction = [
@@ -252,7 +252,7 @@ const { rows } = await res.json();`;
     <section class="band" id="agents">
       <div class="wrap">
         <h2>Context an AI assistant can trust</h2>
-        <p class="sub">GraphOWL includes an MCP server with 101 tools. An assistant can look things up, follow relationships, run queries, propose changes and record what it learned. Every answer traces to facts and rules; agents propose and people decide.</p>
+        <p class="sub">GraphOWL includes an MCP server with 102 tools. An assistant can look things up, follow relationships, run queries, propose changes and record what it learned. Every answer traces to facts and rules; agents propose and people decide.</p>
         <img class="diagram" src="/assets/mcp-flow.svg" alt="An AI assistant calls the MCP server, which offers five families of tools over the graph" loading="lazy" />
         <p class="more"><a href="https://docs.graphowl.app/ai/mcp-overview/">Read the MCP guide →</a> &nbsp; <a href="https://docs.graphowl.app/cookbooks/agent-memory/">Agent memory cookbook →</a></p>
       </div>
